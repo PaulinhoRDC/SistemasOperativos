@@ -13,11 +13,21 @@
 
 int main(int argc, char* args[]) {
 
-    char* buffer[1024];
+    int i = 0;
 
-    int n;
-    while((n = read(STDIN_FILENO,buffer,1)) > 0) {
-        write(STDOUT_FILENO,buffer,n);
+    while( i<size && readc(fd, &buf[i]) > 0) {
+
+        i++;
+        if (((char*)buf)[i-1] == '\n'){
+            return i;
+        }
     }
 
+    return i;
+}
+
+int readc(int fd, char * c){
+
+    // implementação char a char
+    return read (fd, c, 1);
 }
