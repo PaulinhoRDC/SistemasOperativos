@@ -58,54 +58,58 @@ int main (int argc, char *argv[]) {
         close(fd);
     }
 
-
     if(strcmp(argv[2],"-u") == 0) {
         int res;
-        int fd = open("pessoas.txt", O_WRONLY);
+        int fd = open("pessoas.txt", O_WRONLY | O_RDONLY, 0666);
         
-        //pegunta 7
-        if(argv[3] > 0) {
+        while(read(fd,&p,sizeof(Pessoa)) > 0) {
 
-            int posicao = argv[3];
+            if(strcmp(p.nome,argv[3]) == 0) {
 
-            lseek(fd,posicao,SEEK_SET);
+                lseek(fd,-sizeof(Pessoa),SEEK_CUR);
 
-            lseek(fd,sizeof(p.nome),SEEK_CUR);
-            
-            p.idade = atoi(argv[4]);
+                p.idade = atoi(argv[4]);
 
-            res = write(fd,&p,sizeof(p.idade));
-            if(res >= 0) {
-                printf("Atualizado");
-            
+                res = write(fd,&p,sizeof(Pessoa));
+
+                if(res >= 0) {printf("Inserido");}
+                else {perror("Erro no write");}
+
+                close(fd);
             }
-            else{
-                perror("Erro no write");
-            }
-            close(fd); 
         }
-        else {
-            
-            //..... encontrar a pessoas
-            
-            lseek(fd,-sizeof(Pessoa),SEEK_CUR);
+ 
+    }
 
-            strcpy(p.nome,argv[3]);
-            p.idade = atoi(argv[4]);
+    if(strcmp(argv[2],"-o") == 0) {
 
-            res = write(fd,&p,sizeof(Pessoa));
-            if(res >= 0) {
-                printf("Inserido");
+        int res;
+        int fd = open("pessoas.txt", O_WRONLY | O_RDONLY | O_CREAT, 0666);
+
+        int posicao = atoi(argv[3]);
+
+        // encontrar a posicao
+        lseek(fd,sizeof(Pessoa)*posicao,SEEK_SET);
+
+        read(fd,&p,sizeof(p));
+
+        p.idade = atoi(argv[4]);
+
+        lseek(fd,sizeof(p),SEEK_CUR);
+
+        res = write(fd,&p,sizeof(p));
+        if(res >= 0) {
+            printf("Inserido");
             
-            }
-            else{
-                perror("Erro no write");
-            }
-            close(fd);
         }
-    } 
-
+        else{
+            perror("Erro no write");
+        }
+        close(fd); 
+        }
 } 
+
+
 
 
 /*
