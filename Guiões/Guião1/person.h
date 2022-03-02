@@ -1,7 +1,7 @@
-typedef struct Person{
-    char name [200];
-    int age;
-} Person;
+typedef struct pessoa {
+    int idade; 
+    char nome[200];
+}Pessoa;
 
 /*
  ----------------
@@ -16,3 +16,15 @@ ATENÇÃO :
                     -sizeof(Person) , que é o tamanho da pessoa e não todo o espaço alocado para a struct em si.
 
  */
+
+/*
+
+Podíamos ter :
+                    struct pessoa {
+                         int idade; 
+                         char nome[200];
+                    };
+
+                    typedef struc pessoa pessoa.t
+
+*/
