@@ -1,8 +1,9 @@
 /*
+
 6.  Considere uma estrutura (struct) com dados de uma pessoa (nome, idade, ...) 
 e um ficheiro binário que contém registos organizados segundo esta estrutura.
 
-Não assuma que o ficheiro cabe todo em mem ória.
+Não assuma que o ficheiro cabe todo em memória.
 
 Escreva um programa que, consoante a opção, permita:
 
@@ -23,6 +24,8 @@ Observa alguma degradação de desempenho à medida que o ficheiro cresce?
 #include <fcntl.h>
 #include <stdio.h>
 #include <string.h>
+
+#include <sys/stat.h>
 
 #include "person.h"
 
@@ -46,20 +49,18 @@ int main (int argc, char *argv[]) {
 
         res = write(fd, &p, sizeof(p));      //temos de passar obrigatoriamente, o apontador de p, no segundo parâmetro
         
-        int pos = lseek(fd, -sizeof(Pessoa), SEEK_CUR);                         // alínea 7
+        //int pos = lseek(fd, -sizeof(Pessoa), SEEK_CUR);                         // ALÍNEA 7 //
 
-        /*
         //index of most recent entry (Nao faço ideia como é que isto funciona)
         struct stat st;
         fstat(fd,&st);
         off_t filesize = st.st_size;
-        pos = (int)filesize / sizeof(Pessoa);
-
-        */
+        int pos = (int)filesize / sizeof(Pessoa);
+        
 
         if(res >= 0) {
             printf("Inserido ");
-            printf("Na posição: %d", pos);                                                                                             // alínea 7
+            printf("Na posição: %d", pos);    // alínea 7
         
         }
         else{
@@ -71,7 +72,7 @@ int main (int argc, char *argv[]) {
 
     if(strcmp(argv[2],"-u") == 0) {
         int res;
-        int fd = open("pessoas.txt", O_WRONLY | O_RDONLY, 0666);
+        int fd = open("pessoas.txt", O_RDWR);
         if(fd == -1) perror("Error no open");
 
         while(read(fd,&p,sizeof(Pessoa)) > 0) {
@@ -100,7 +101,7 @@ int main (int argc, char *argv[]) {
     if(strcmp(argv[2],"-o") == 0) {
 
         int res;
-        int fd = open("pessoas.txt", O_WRONLY | O_RDONLY | O_CREAT, 0666);
+        int fd = open("pessoas.txt", O_RDWR);
         if(fd == -1) perror("Error no open");
 
         int posicao = atoi(argv[3]);
