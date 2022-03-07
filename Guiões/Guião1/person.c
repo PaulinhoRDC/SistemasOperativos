@@ -42,13 +42,24 @@ int main (int argc, char *argv[]) {
         p.idade = atoi(argv[4]);
 
         int fd = open("pessoas.txt", O_CREAT | O_APPEND | O_WRONLY, 0666);
+        if(fd == -1) perror("Error no open");
 
         res = write(fd, &p, sizeof(p));      //temos de passar obrigatoriamente, o apontador de p, no segundo parâmetro
-        int pos = lseek(fd, -sizeof(Pessoa), SEEK_CUR);                                                                     // alínea 7
+        
+        int pos = lseek(fd, -sizeof(Pessoa), SEEK_CUR);                         // alínea 7
+
+        /*
+        //index of most recent entry (Nao faço ideia como é que isto funciona)
+        struct stat st;
+        fstat(fd,&st);
+        off_t filesize = st.st_size;
+        pos = (int)filesize / sizeof(Pessoa);
+
+        */
 
         if(res >= 0) {
             printf("Inserido ");
-            printf(" %d", pos);                                                                                             // alínea 7
+            printf("Na posição: %d", pos);                                                                                             // alínea 7
         
         }
         else{
@@ -61,7 +72,8 @@ int main (int argc, char *argv[]) {
     if(strcmp(argv[2],"-u") == 0) {
         int res;
         int fd = open("pessoas.txt", O_WRONLY | O_RDONLY, 0666);
-        
+        if(fd == -1) perror("Error no open");
+
         while(read(fd,&p,sizeof(Pessoa)) > 0) {
 
             if(strcmp(p.nome,argv[3]) == 0) {
@@ -72,8 +84,12 @@ int main (int argc, char *argv[]) {
 
                 res = write(fd,&p,sizeof(Pessoa));
 
-                if(res >= 0) {printf("Inserido");}
-                else {perror("Erro no write");}
+                if(res >= 0) {
+                    printf("Inserido");
+                }
+                else {
+                    perror("Erro no write");
+                }
 
                 close(fd);
             }
@@ -85,17 +101,22 @@ int main (int argc, char *argv[]) {
 
         int res;
         int fd = open("pessoas.txt", O_WRONLY | O_RDONLY | O_CREAT, 0666);
+        if(fd == -1) perror("Error no open");
 
         int posicao = atoi(argv[3]);
 
         // encontrar a posicao
-        lseek(fd,sizeof(Pessoa)*posicao,SEEK_SET);
 
-        read(fd,&p,sizeof(p));
+        // lseek(fd,sizeof(Pessoa)*posicao,SEEK_SET);
+        lseek(fd,sizeof(struct pessoa) * ( atoi(argv[3]) -1),SEEK_SET);
+
+        int fde = read(fd,&p,sizeof(p));
+        if(fde < 0) perror("Error no read");
 
         p.idade = atoi(argv[4]);
 
-        lseek(fd,sizeof(p),SEEK_CUR);
+        // lseek(fd,sizeof(p),SEEK_CUR);
+        lseek(fd, sizeof(struct pessoa) * ( atoi(argv[3]) -1),SEEK_SET);
 
         res = write(fd,&p,sizeof(p));
         if(res >= 0) {
@@ -107,6 +128,19 @@ int main (int argc, char *argv[]) {
         }
         close(fd); 
         }
+
+        if(strcmp(argv[2],"-h") == 0) {
+            ssize_t res;
+            char idString[20];
+
+            int fd = open("pessoas.txt", O_RDONLY);
+
+            while((res = read(fd,&p,sizeof(Pessoa))) > 0) {
+                printf("%s - %d \n", p.nome,p.idade);
+            }
+            close(fd);
+        }
+
 } 
 
 
