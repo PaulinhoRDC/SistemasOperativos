@@ -12,19 +12,25 @@ int main (int argc, char *argv[]) {
     pid_t pid;
     int status;
 
+    // Executar sequencialmente
     for (int i=0; i<10; i++){
 	    pid = fork();
         if(pid == 0) {
-            printf("pai = %d , filho = %d \n", getppid(), getpid());
-            exit(0);
+            printf("Pai = %d , Filho = %d \n", getppid(), getpid());
+            exit(i);        // Para sair do correto
+        }
+    
+        int status;                                     // Para termos a espera entre cada um elemento do ciclo
+        pid_t pid = wait(&status);
+        if(WIFEXITED(status)) {
+            printf("_exit: %d \n", WEXITSTATUS(status));
         }
     }    
 
     //waitpid(pid,&status, WCONTINUED);
 
     puts("Out for");
-
-    return 0; //não é necessário, mas por norma, quando um porgrama corre bem, devolve-se 0;
+    return 0;               //não é necessário, mas por norma, quando um porgrama corre bem, devolve-se 0;
 }
 
 /*
@@ -59,6 +65,8 @@ int main (int argc, char *argv[]) {                         // VERSÃO CONCORREN
     puts("Out for");    
     return 0;                      // aqui temos um ciclo de criação de processos e um ciclo de espera de ciclo de processos
 }
+
+*/
 
 /*
 
