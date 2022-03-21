@@ -56,9 +56,10 @@ int main() {
     // Executar em concorrencia
     for(int i=0; i<linhas; i++) {
         pid = fork();                                                   // cria-se um filho por linha
+        arrayPids[i] = pid;
 
         if(pid == 0) {
-            arrayPids[i] = getppid();                                    // guardar pid do filho criado
+            // arrayPids[i] = getppid();                                    // guardar pid do filho criado
 
             //percorrer as colunas da matrix até encontrar o numero
             for(int j=0;j<col;j++) {
@@ -78,8 +79,12 @@ int main() {
         pid_t pid = wait(&status);
         
         if(WIFEXITED(status)) {
-            printf("_exit: %d \n", WEXITSTATUS(status));
-            if(WEXITSTATUS(status) == 1) ocorr++;
+            if(WEXITSTATUS(status) == 1){
+                ocorr++;
+                for(int j=0; j<linhas; j++){
+                    if(arrayPids[j] == pid) { printf ("Linha: %d , Pid: %d  \n", j, pid); }
+                }
+            }
         }
     }
     
@@ -91,11 +96,22 @@ int main() {
     printmatrix();
     printf("\n");
 
-    for(int i=0; i<linhas; i++){
-        printf("%d \n", arrayPids[i]);
-    }
-
-
-
     return 0;
 } 
+
+/**
+ *  (base) paulinhordc@MBP-de-Paulo Guião2 % gcc 6.c -o 6
+    (base) paulinhordc@MBP-de-Paulo Guião2 % ./6         
+    Linha: 1 , Pid: 1255  
+    Linha: 0 , Pid: 1254  
+    Linha: 4 , Pid: 1258  
+
+    Ocorr: 3 
+
+    0000000001
+    0000010000
+    0000000000
+    0000000000
+    1000000000
+ * 
+ */
