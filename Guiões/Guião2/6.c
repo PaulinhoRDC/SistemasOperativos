@@ -81,7 +81,7 @@ int main() {
         if(WIFEXITED(status)) {
             if(WEXITSTATUS(status) == 1){
                 ocorr++;
-                for(int j=0; j<linhas; j++){
+                for(int j=0; j<linhas; j++){                                                 // for(int j=0; arrayPids[j] != pid; j++)
                     if(arrayPids[j] == pid) { printf ("Linha: %d , Pid: %d  \n", j, pid); }
                 }
             }
@@ -98,6 +98,15 @@ int main() {
 
     return 0;
 } 
+
+/*
+podiamos fazer, ao invés de usar printf: 
+                                            for(int i=0; i!=N; i++) {
+                                                char str[256];
+                                                snprintf (str, sizeof(str), "%d", i);
+                                            }
+*/
+
 
 /**
  *  (base) paulinhordc@MBP-de-Paulo Guião2 % gcc 6.c -o 6
