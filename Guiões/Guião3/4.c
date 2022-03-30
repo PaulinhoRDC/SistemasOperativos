@@ -16,7 +16,7 @@ original.
 #include <sys/wait.h>
 
 
-int mySystem(char *comand) {
+int mySystem(char *comand) {                                                    // VERIFICAR AULA DO STOR ONLINE (DIA 25/03/2022)
 
     char *buf[100];
 
