@@ -33,7 +33,7 @@ int redir(char *ficheiroentrada, char *ficheirosaida, char *comando) {
 
     execlp(comando,comando,NULL);
 
-
+    
     return 0;
 } 
 
