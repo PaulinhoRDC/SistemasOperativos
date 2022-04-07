@@ -14,50 +14,40 @@ e/ou a saída. O programa poderá ser invocado, com:
 #include <sys/wait.h>
 
 
-int redir(char *ficheiroentrada, char *ficheirosaida, char *comando) {
-
-    int outputOriginal = dup(1);
-
-    int fd = open(ficheiroentrada,O_RDONLY);
-    if(fd == -1) perror("Erro no open 1");
-    
-    dup2(fd,0);
-    close(fd);
-
-    int fd2 = open(ficheirosaida, O_CREAT | O_WRONLY | O_TRUNC, 0666);
-    if(fd2 == -1) perror("Erro no open 2");
-    dup2(fd2,1);
-    close(fd2);
-
-    dup2(outputOriginal,1);
-
-    execlp(comando,comando,NULL);
-
-    
-    return 0;
-} 
-
-
-
 int main(int argc, char* argv[]) {
 
     //redir [-i fich_entrada] [-o fich_saida] comando arg1 arg2 ...
+    char ficheiroentrada[50];
+    char ficheirosaida[50];
 
-    char ficheiroentrada[100];
-    char ficheirosaida[100];
-    char comando[10];
+    int i;
+    int index = 1;
+    for(i=1;i<argc;i++) {
 
-    strcpy(ficheiroentrada,argv[1]);
-    strcpy(ficheirosaida,argv[2]);
-    strcpy(comando,argv[3]);
+        if(strcmp(argv[i],"-i") == 0) {
+            strcpy(ficheiroentrada,argv[i+1]);
+            printf("%s \n",ficheiroentrada);
+            index += 2;
+        }
 
-    redir(ficheiroentrada,ficheirosaida,comando);
+        if(strcmp(argv[i],"-o") == 0) {
+            strcpy(ficheirosaida,argv[i+1]);
+            printf("%s \n",ficheirosaida);
+            index += 2;
+        }
+    }
 
-    //printf("%s \n",ficheiroentrada);
-    //printf("%s \n",ficheirosaida);
+    printf("%d",index);
 
+    execvp(argv[index],&argv[index]);
 
+    /*
+    pid_t pid;
+    pid = fork();
 
-
+    if(pid == 0) {
+        execvp(argv[i],&argv[i]);
+    }
+    */
     return 0;
 } 
