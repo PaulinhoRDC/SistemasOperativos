@@ -3,5 +3,6 @@
         "unistd.h": "c",
         "stdlib.h": "c",
         "5.C": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }
