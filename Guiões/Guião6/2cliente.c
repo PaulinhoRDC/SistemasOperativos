@@ -1,3 +1,9 @@
+/*
+2. Escreva um programa “servidor”, que fique a correr em background, e acrescente a um ficheiro de “log”
+todas as mensagens que sejam enviadas por “clientes”. 
+Escreva um programa cliente que envia para o servidor o seu argumento. Cliente e servidor devem comunicar via pipes com nome.
+*/
+
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
