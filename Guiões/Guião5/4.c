@@ -14,12 +14,10 @@ int main(){
     pipe(pd);
 
     switch(fork()) {
-        case 0: /* filho */
-
-                dup2(pd[1], 1);
-                
-                //fechar canais desnecessários
+        case 0: /* filho */                          
                 close(pd[0]);
+
+                dup2(pd[1], 1);                 //fechar canais desnecessários
                 close(pd[1]);
 
                 execlp("ls", "ls", "/etc", NULL);
@@ -32,14 +30,14 @@ int main(){
                 return 1; /*EXIT_FAILURE */
 
         default: /* pai sucesso */
-                dup2(pd[0], 0);
-
-                close(pd[0]);
                 close(pd[1]);
+
+                dup2(pd[0], 0);
+                close(pd[0]);
                 
                 execlp("wc", "wc", "-l", NULL);                     //FAZEMOS WC NO PAI, PARA QUE O PAI NÃO TENHA DE ESPERAR PELO FILHO             
                 perror("wc");                                       //LOGO O PAI FAZ O ÚLTIMO COMANDO NO ENCADEAMENTO DE COMANDOS QUE TEMOS
-
+                                                                    //ISTO, PORQUE A SHELL DETETA A MORTE DO PAI E AVANÇA, E O FILHO AINDA NÃO "MORREU"
                 _exit(1);
 
 

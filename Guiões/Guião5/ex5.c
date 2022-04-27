@@ -59,7 +59,7 @@ int main (int args, char * argv[]){
         dup2(pipe_fd[1][1], 1);
         close(pipe_fd[1][1]);
 
-        execlp("cut","cut","f7","d:",NULL);
+        execlp("cut","cut","-f7","-d:",NULL);
 
         _exit(1);
     }
