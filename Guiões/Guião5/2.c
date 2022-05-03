@@ -1,8 +1,8 @@
 /*
 
-2. Modifique o programa anterior de modo `a leitura do pipe ser realizada enquanto não for detectada a
-situac¸ ˜ao de end of file no descritor respectivo. Repare que esta situação acontece apenas quando nenhum
-processo – neste caso, pai e filho – tˆem aberto o descritor de escrita do pipe.
+2. Modifique o programa anterior de modo à leitura do pipe ser realizada enquanto não for detectada a
+situação de end of file no descritor respectivo. Repare que esta situação acontece apenas quando nenhum
+processo – neste caso, pai e filho – têm aberto o descritor de escrita do pipe.
 
 */
 

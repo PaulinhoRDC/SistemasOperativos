@@ -32,37 +32,46 @@ necessidade de fechar o(s) descritor(es) de escrita no pipe de modo a verificar-
 
 #include <unistd.h>
 #include <stdio.h>
+#include <sys/wait.h>
 
-int main(){
+int main(int argc, char *argv[]) {
 
-    char buffer[512];
-    int nb;
-    int pd[2];
-    pipe(pd);
+    int p[2];
+    char buffer[1024];
+    int status;
 
-    switch(fork()) {
-        case 0: /* filho */
-
-                dup2(pd[0], 0);
-                
-                //fechar canais desnecessários
-                close(pd[0]);
-                close(pd[1]);
-
-                execlp("wc", "wc", "-l", NULL);
-                perror("wc");
-                _exit(1);
-        case -1: /* pai  erro */
-                perror("fork");
-                return 1; /*EXIT_FAILURE */
-        default: /* pai sucesso */
-                close(pd[0]);
-                while((nb = read(0, buffer, sizeof(buffer)) > 0)){
-                    write(pd[1], buffer, nb);
-                }
-                close(pd[1]);
-
-
+    if(pipe(p) == -1) {         /* pai  erro */
+        perror("Erro no pipe");
+        return -1;
     }
-    return 0;  /* EXIT_SUCCESS => #include <stdlib.h>  */
+
+    pid_t pid;
+    pid = fork();
+
+    if(pid==0) {            /* filho */
+        dup2(p[0],0);
+
+        // fechar o que nao é necessário
+        close(p[0]);
+        close(p[1]);
+
+        execlp("wc","wc",NULL);
+
+        _exit(0);
+    }
+
+    /* pai sucesso */
+    close(p[0]);
+
+    int n;
+    while((n = read(0,buffer,sizeof(buffer))) > 0) {
+        write(p[1],buffer,n);
+    }
+
+
+    close(p[1]);
+    wait(&status);
+    printf("[Pai] Out of wait \n");
+
+    return 0;
 }

@@ -1,11 +1,11 @@
 /*
 
-1. Escreva um programa que crie um pipe an´onimo e de seguida crie um processo filho. Experimente o pai
-enviar uma linha de texto atrav´es do descritor de escrita do pipe, e o filho receber uma linha a partir do
+1. Escreva um programa que crie um pipe anónimo e de seguida crie um processo filho. Experimente o pai
+enviar uma linha de texto através do descritor de escrita do pipe, e o filho receber uma linha a partir do
 respectivo descritor de leitura.
 Experimente de seguida provocar um atraso antes do pai enviar a linha de texto (p. ex., sleep(5)).
-Note agora que a leitura do filho bloqueia enquanto o pai n˜ao realizar a operação de escrita no pipe.
-Experimente agora inverter os papeis de modo à informac¸ ˜ao ser transmitida do filho para o pai.
+Note agora que a leitura do filho bloqueia enquanto o pai não realizar a operação de escrita no pipe.
+Experimente agora inverter os papeis de modo à informação ser transmitida do filho para o pai.
 
 */
 
