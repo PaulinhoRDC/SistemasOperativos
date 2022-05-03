@@ -1,0 +1,15 @@
+total 880
+-rwxr-xr-x  1 paulinhordc  staff  49592 30 Mar 16:50 1
+-rw-r--r--  1 paulinhordc  staff   1013 30 Mar 17:05 1.c
+-rwxr-xr-x  1 paulinhordc  staff  49672 30 Mar 16:43 2
+-rw-r--r--  1 paulinhordc  staff   1013 30 Mar 16:52 2.c
+-rwxr-xr-x  1 paulinhordc  staff  49592  3 Mai 14:00 3
+-rw-r--r--  1 paulinhordc  staff   1093  3 Mai 14:00 3.c
+-rwxr-xr-x  1 paulinhordc  staff  49832  3 Mai 14:10 4
+-rw-r--r--  1 paulinhordc  staff   1283  3 Mai 14:10 4.c
+-rwxr-xr-x  1 paulinhordc  staff  49840  3 Mai 13:31 ExemploProf
+-rw-r--r--  1 paulinhordc  staff   1131 30 Mar 16:28 ExemploProf.c
+-rw-r--r--  1 paulinhordc  staff  87812 15 Fev 00:04 dups.pdf
+-rw-r--r--  1 paulinhordc  staff      0  3 Mai 14:10 erros.txt
+-rw-r--r--@ 1 paulinhordc  staff  66696 30 Mar 16:28 guiao-04.pdf
+-rw-r--r--  1 paulinhordc  staff     25  3 Mai 14:00 saida.txt

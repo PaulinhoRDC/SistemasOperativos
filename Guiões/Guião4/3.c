@@ -14,7 +14,7 @@ depois do redireccionamento dos descritores de entrada e saída. Note que, mais 
 #include <sys/wait.h>
 
 int main(){
-int outputoriginal = dup(1);
+    int outputoriginal = dup(1);
 
     int fd = open("/etc/passwd", O_RDONLY);
     dup2(fd,0);
