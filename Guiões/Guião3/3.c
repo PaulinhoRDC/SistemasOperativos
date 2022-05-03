@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
         pid = fork();                                                   // cria-se um filho 
         if(pid == 0) {
             execlp (argv[i], argv[i], NULL);
-            _exit(i);                                   // não sai com o valor esperado, pois como o execlp é executado, o exit(i) não é executado e por omissão, sai com o valor 0;
+            _exit(i);         // não sai com o valor esperado, pois como o execlp é executado, o exit(i) não é executado e por omissão, sai com o valor 0;
         }
     }
 

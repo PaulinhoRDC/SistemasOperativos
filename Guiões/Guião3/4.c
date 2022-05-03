@@ -63,3 +63,21 @@ int main() {
 
 
 }
+
+/*
+
+paulinhordc@MBP-de-Paulo Guião3 % gcc 4.c -o 4
+paulinhordc@MBP-de-Paulo Guião3 % ./4
+total 744
+-rwxr-xr-x  1 paulinhordc  staff  49472 23 Mar 16:50 1
+-rw-r--r--  1 paulinhordc  staff    519 23 Mar 16:58 1.c
+-rwxr-xr-x  1 paulinhordc  staff  49600 23 Mar 16:59 2
+-rw-r--r--  1 paulinhordc  staff    583 23 Mar 16:59 2.c
+-rwxr-xr-x  1 paulinhordc  staff  49600 23 Mar 17:47 3
+-rw-r--r--  1 paulinhordc  staff   1132 24 Mar 14:53 3.c
+-rwxr-xr-x  1 paulinhordc  staff  49808  3 Mai 12:24 4
+-rw-r--r--  1 paulinhordc  staff   1556 28 Mar 16:31 4.c
+-rw-r--r--@ 1 paulinhordc  staff  61277 15 Fev 00:04 execs.pdf
+-rw-r--r--@ 1 paulinhordc  staff  89295 23 Mar 16:45 guiao-03.pdf
+
+*/
