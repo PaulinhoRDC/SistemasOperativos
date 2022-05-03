@@ -25,6 +25,9 @@ int main (int argc, char *argv[]) {
 }
 
 /*
-(base) paulinhordc@MacBook-Pro-de-Paulo Guião1 % gcc 2.c -o 2
-(base) paulinhordc@MBP-de-Paulo Guião1 % ./2
+paulinhordc@MBP-de-Paulo Guião2 % gcc 2.c -o 2
+paulinhordc@MBP-de-Paulo Guião2 % ./2         
+ola
+filho: pid = 3081 , ppid = 3079 
+pai: pid = 3079 , ppid = 1983 , filho = 3081
 */

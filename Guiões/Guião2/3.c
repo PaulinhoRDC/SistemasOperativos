@@ -35,17 +35,28 @@ int main (int argc, char *argv[]) {
 
 /*
 (base) paulinhordc@MacBook-Pro-de-Paulo Guião2 % gcc 3.c -o 3
-(base) paulinhordc@MacBook-Pro-de-Paulo Guião2 % ./3         
-pai = 6359 , filho = 6361 
-pai = 6359 , filho = 6362 
-pai = 6359 , filho = 6363 
-pai = 6359 , filho = 6364 
-pai = 6359 , filho = 6365 
-pai = 6359 , filho = 6366 
-pai = 6359 , filho = 6367 
-pai = 6359 , filho = 6368 
-pai = 6359 , filho = 6369 
-pai = 6359 , filho = 6370 
+paulinhordc@MBP-de-Paulo Guião2 % ./3
+Pai = 3214 , Filho = 3216 
+_exit: 0 
+Pai = 3214 , Filho = 3217 
+_exit: 1 
+Pai = 3214 , Filho = 3218 
+_exit: 2 
+Pai = 3214 , Filho = 3219 
+_exit: 3 
+Pai = 3214 , Filho = 3220 
+_exit: 4 
+Pai = 3214 , Filho = 3221 
+_exit: 5 
+Pai = 3214 , Filho = 3222 
+_exit: 6 
+Pai = 3214 , Filho = 3223 
+_exit: 7 
+Pai = 3214 , Filho = 3224 
+_exit: 8 
+Pai = 3214 , Filho = 3225 
+_exit: 9 
+Out for
 */
 
 /*
@@ -70,7 +81,7 @@ int main (int argc, char *argv[]) {                         // VERSÃO CONCORREN
 
 /*
 
-int main (int argc, char *argv[]) {                         // VERSÃO CONCORRENTE //
+int main (int argc, char *argv[]) {                         
 
     pid_t pid;
     int status;
