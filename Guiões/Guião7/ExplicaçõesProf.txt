@@ -1,0 +1,44 @@
+                                                        1 Objectivos
+Familiarizar-se e utilizar as chamadas ao sistema relativas a sinais.
+
+                                                    2 Chamadas ao sistema
+#include <signal.h>
+#include <sys/types.h>
+typedef void (*sighandler_t)(int);
+
+sighandler_t signal(int signum, sighandler_t handler);
+int kill(pid_t pid, int sig);
+unsigned int alarm(unsigned int seconds);
+int pause(void);
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+Sinal                   Causa/Descrição
+SIGINT          Interrupção a partir do teclado (Ctrl+c)
+SIGQUIT         Terminação a partir do teclado (Ctrl+\)
+SIGFPE          Erro de cálculo matemático
+SIGKILL         Forçar terminação
+SIGSEGV         Acesso inválido (Segmentation fault)
+SIGPIPE         Escrita em PIPE sem leitores
+SIGALRM         Sinal de temporizador (alarm(2))
+SIGCHLD         Processo filho parou ou terminou        -> Por omissão não matam o processo
+SIGCONT         Continuar execução, se parado           -> Por omissão não matam o processo
+SIGSTOP         (Ctrl+z)                                -> Por omissão não matam o processo
+SIGUSR1         Sinal para uso personalizado
+SIGUSR2         Sinal para uso personalizado
+
+
+
+int main(){
+    sighandler_t h = NULL;
+    signal(SIGINT, f);
+    signal(SIGQUIT, f);
+    pause();
+}
+
+void f (int sig){
+    switchs(sig){
+        case SIGINT:  .... break
+        case SIGQUIT: .... break
+    }
+}
