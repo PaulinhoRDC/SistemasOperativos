@@ -13,14 +13,14 @@ Se carregar em Ctrl+\ o programa deverá indicar quantas vezes o utilizador carr
 int ctrl_c_counter = 0;
 int seconds = 0;
 
-void sigint_handler (int signum) {
+void sigint_handler (int sigint) {
     printf("sigint received code %d\n",signum);
     //tempo passado
     printf("execution time: %d\n",seconds);
     ctrl_c_counter ++;
 }
 
-void sigquit_handler (int signum) {
+void sigquit_handler (int sigquit) {
     printf("sigquit received code %d\n",signum);
     printf("ctrl + c counter: %d",ctrl_c_counter);
     exit(0);
@@ -41,11 +41,11 @@ void handler(int signal){
             seconds ++; 
             alarm(1);
         case SIGINT:
-            printf("sigint received code %d\n",signum);
+            printf("sigint received code: %d\n",signum);
              printf("execution time: %d\n",seconds);
             ctrl_c_counter ++;
         case SIGQUIT:
-            printf("sigquit received code %d\n",signum);
+            printf("sigquit received code: %d\n",signum);
             printf("ctrl + c counter: %d",ctrl_c_counter);
             exit(0);
     }
