@@ -1,5 +1,5 @@
-Programação Orientada Aos Objetos
+Sistemas Operativos
 
-Resolução do Trabalho Prático da disciplina de Programação Orientada Aos Objetos 20/21
+Resolução do Trabalho Prático da disciplina de Sistemas Operativos 21/22
 
-Nota Final: 14
+Nota Final: 17,6
